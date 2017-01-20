@@ -11,7 +11,7 @@ import com.example.JokeTeller;
 import com.example.jokedisplayer.DisplayActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +42,23 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
+    public void tellJokeFromAndroidLib(View view) {
         Intent jokeIntent = new Intent(this, DisplayActivity.class);
         jokeIntent.putExtra("joke", new JokeTeller().getJoke());
         startActivity(jokeIntent);
     }
 
+    public void tellJokeFromGCE(View view) {
+        EndPointAsyncTask endPointAsyncTask = new EndPointAsyncTask();
+        endPointAsyncTask.delegate = this;
+        endPointAsyncTask.execute();
 
+    }
+
+    @Override
+    public void processFinish(String output) {
+        Intent jokeIntent = new Intent(this, DisplayActivity.class);
+        jokeIntent.putExtra("joke", output);
+        startActivity(jokeIntent);
+    }
 }
