@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
         android:onClick="tellJokeFromAndroidLib"
-        android:text="@string/button_text_online" />
+        android:text="@string/button_text_offline" />
 
     <Button
         android:layout_width="wrap_content"
