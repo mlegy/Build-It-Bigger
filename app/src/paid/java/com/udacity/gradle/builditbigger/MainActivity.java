@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.JokeTeller;
 import com.example.jokedisplayer.DisplayActivity;
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
@@ -50,24 +49,18 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJokeFromAndroidLib(View view) {
-        this.joke = new JokeTeller().getJoke();
-        showJoke();
-
-    }
-
-    public void tellJokeFromGCE(View view) {
+    public void tellJoke(View view) {
         mProgressBar.setVisibility(View.VISIBLE);
         mFragment.setVisibility(View.GONE);
         EndPointAsyncTask endPointAsyncTask = new EndPointAsyncTask();
         endPointAsyncTask.delegate = this;
         endPointAsyncTask.execute();
-        showJoke();
     }
 
     @Override
     public void processFinish(String output) {
         this.joke = output;
+        showJoke();
         mProgressBar.setVisibility(View.GONE);
         mFragment.setVisibility(View.VISIBLE);
     }

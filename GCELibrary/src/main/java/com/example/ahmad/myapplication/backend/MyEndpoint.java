@@ -6,6 +6,7 @@
 
 package com.example.ahmad.myapplication.backend;
 
+import com.example.JokeTeller;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -24,23 +25,10 @@ import com.google.api.server.spi.config.ApiNamespace;
 )
 public class MyEndpoint {
 
-    private String[] jokes = {
-            "Q: Why was six scared of seven? " +
-                    " A: Because seven \"ate\" nine.",
-            "What happens to a frog's car when it breaks down?" +
-                    "\"\nIt gets toad away.",
-            "Q: How do you count cows? \n" +
-                    "A: With a cowculator."
-    };
-
-    /**
-     * A simple endpoint method that takes a name and says Hi back
-     */
     @ApiMethod(name = "sayJoke")
     public MyBean sayJoke() {
         MyBean response = new MyBean();
-        response.setData(jokes[(int) (Math.random() * 3)]);
-
+        response.setData(new JokeTeller().getJoke());
         return response;
     }
 
