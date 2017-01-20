@@ -21,16 +21,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
         android:onClick="tellJokeFromAndroidLib"
-        android:text="@string/button_text_online" />
+        android:text="@string/button_text_online"
+
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
-        android:layout_toEndOf="@id/offline_joke_button"
-        android:layout_toRightOf="@id/offline_joke_button"
         android:onClick="tellJokeFromGCE"
-        android:text="@string/button_text_online" />
+        android:layout_toRightOf="@id/offline_joke_button"
+        android:text="@string/button_text_online"
+
+        />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -39,6 +42,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id" />
+        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
