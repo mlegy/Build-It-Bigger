@@ -10,15 +10,14 @@ import android.view.View;
 import com.example.JokeTeller;
 import com.example.jokedisplayer.DisplayActivity;
 
-
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
+    private String joke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,22 +42,26 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     }
 
     public void tellJokeFromAndroidLib(View view) {
-        Intent jokeIntent = new Intent(this, DisplayActivity.class);
-        jokeIntent.putExtra("joke", new JokeTeller().getJoke());
-        startActivity(jokeIntent);
+        this.joke = new JokeTeller().getJoke();
+        showJoke();
+
     }
 
     public void tellJokeFromGCE(View view) {
         EndPointAsyncTask endPointAsyncTask = new EndPointAsyncTask();
         endPointAsyncTask.delegate = this;
         endPointAsyncTask.execute();
-
+        showJoke();
     }
 
     @Override
     public void processFinish(String output) {
+        this.joke = output;
+    }
+
+    private void showJoke() {
         Intent jokeIntent = new Intent(this, DisplayActivity.class);
-        jokeIntent.putExtra("joke", output);
+        jokeIntent.putExtra("joke", joke);
         startActivity(jokeIntent);
     }
 }
